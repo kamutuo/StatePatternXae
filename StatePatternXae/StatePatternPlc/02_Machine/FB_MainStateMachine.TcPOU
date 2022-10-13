@@ -3,16 +3,30 @@
   <POU Name="FB_MainStateMachine" Id="{0f2041b2-a01f-4e9f-96cb-99c64e7f13f9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_MainStateMachine
 VAR
+	_fbStateReadParameters		: FB_StateReadParameters(
+		fbMainStateMachine			:= THIS^);
 	_fbStateEStop				: FB_StateEStop(
 		fbMainStateMachine			:= THIS^);
 	_fbStateInit				: FB_StateInit(
 		fbMainStateMachine			:= THIS^);
-	_ipActState					: I_State := _fbStateEStop;
+	_ipActState					: I_State := _fbStateReadParameters;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="ipStateEStop" Id="{79062b13-1ab4-4df0-a77c-9ef391cc880d}">
+      <Declaration><![CDATA[PROPERTY ipStateEStop : I_State]]></Declaration>
+      <Get Name="Get" Id="{ceb4d155-51eb-41f9-8175-275c35c7f30e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipStateEStop := _fbStateEStop;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="Execute" Id="{a6afd69f-f3e0-4a88-9316-9340d8c4bc07}">
       <Declaration><![CDATA[METHOD Execute
 VAR_INST
@@ -23,6 +37,8 @@ VAR_INST
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[_fbFTrigStartButton(CLK := IO.bStartButton);
+
+_ipActState.Execute();
 
 IF _fbFTrigStartButton.Q THEN
 	_ipActState.StartButtonPressed();
@@ -48,18 +64,6 @@ END_IF
 ]]></ST>
       </Implementation>
     </Method>
-    <Property Name="ipStateEStop" Id="{79062b13-1ab4-4df0-a77c-9ef391cc880d}">
-      <Declaration><![CDATA[PROPERTY ipStateEStop : I_State]]></Declaration>
-      <Get Name="Get" Id="{ceb4d155-51eb-41f9-8175-275c35c7f30e}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[ipStateEStop := _fbStateEStop;
-]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="ipStateInit" Id="{b1a17f63-28f2-4d52-b42d-455e8da1bfdf}">
       <Declaration><![CDATA[PROPERTY ipStateInit : I_State]]></Declaration>
       <Get Name="Get" Id="{5547f3cd-571e-4d7a-b7bc-5e5464abce3b}">

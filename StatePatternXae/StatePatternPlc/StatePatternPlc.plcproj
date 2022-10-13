@@ -23,6 +23,9 @@
     <Compile Include="02_Machine\01_States\FB_StateInit.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="02_Machine\01_States\FB_StateReadParameters.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="02_Machine\FB_MainStateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,16 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="05_MachineParameters\MachineParameters.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="05_MachineParameters\ST_MachineParameters.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="05_MachineParameters\ST_MachineParametersAxis.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -50,6 +63,7 @@
     <Folder Include="02_Machine\01_States" />
     <Folder Include="03_IO" />
     <Folder Include="04_Safety" />
+    <Folder Include="05_MachineParameters" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -59,6 +73,10 @@
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_XmlDataSrv">
+      <DefaultResolution>Tc2_XmlDataSrv, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_XmlDataSrv</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

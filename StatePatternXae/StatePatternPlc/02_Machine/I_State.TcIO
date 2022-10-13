@@ -9,18 +9,22 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="SafetyTripped" Id="{e9e19173-0a98-4f7d-9f1a-b489646f2a63}">
-      <Declaration><![CDATA[METHOD SafetyTripped
-VAR_INPUT
-END_VAR
+    <Method Name="StopButtonPressed" Id="{5653cda2-2f42-4886-9fae-7114d7fb78d2}">
+      <Declaration><![CDATA[METHOD StopButtonPressed
+]]></Declaration>
+    </Method>
+    <Method Name="Execute" Id="{694935d9-e2c1-45ae-8e5c-da8824704a3b}">
+      <Declaration><![CDATA[METHOD Execute
 ]]></Declaration>
     </Method>
     <Method Name="StartButtonPressed" Id="{c27a95ed-7eb3-4ce2-a499-f52fe471f04c}">
       <Declaration><![CDATA[METHOD StartButtonPressed
 ]]></Declaration>
     </Method>
-    <Method Name="StopButtonPressed" Id="{5653cda2-2f42-4886-9fae-7114d7fb78d2}">
-      <Declaration><![CDATA[METHOD StopButtonPressed
+    <Method Name="SafetyTripped" Id="{e9e19173-0a98-4f7d-9f1a-b489646f2a63}">
+      <Declaration><![CDATA[METHOD SafetyTripped
+VAR_INPUT
+END_VAR
 ]]></Declaration>
     </Method>
   </Itf>

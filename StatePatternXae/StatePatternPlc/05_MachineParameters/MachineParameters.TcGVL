@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <GVL Name="MachineParameters" Id="{4d240832-98a8-4955-a059-9207cc2e4d0f}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	sFilePath			: STRING := 'C:\Temp\MachineParameters.xml';
+	sXPath				: STRING := '/MachineParameters/Data';
+	stData				: ST_MachineParameters;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

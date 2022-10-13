@@ -9,20 +9,18 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Method Name="FB_init" Id="{bba99187-f902-4bd8-8cac-07377dad3116}">
-      <Declaration><![CDATA[METHOD FB_init : BOOL
-VAR_INPUT
-	// if TRUE, the retain variables are initialized (warm start / cold start)
-	bInitRetains			: BOOL;
-	// if TRUE, the instance afterwards gets moved into the copy code (online
-	// change)
-	bInCopyCode				: BOOL;
-	fbMainStateMachine		: REFERENCE TO FB_MainStateMachine;
-END_VAR
+    <Method Name="StartButtonPressed" Id="{259cd519-0d3b-4132-81ec-9e6582ef725a}">
+      <Declaration><![CDATA[METHOD StartButtonPressed
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
-]]></ST>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StopButtonPressed" Id="{5bcbd9e0-34b1-49d0-92cf-ebd7b40f9183}">
+      <Declaration><![CDATA[METHOD StopButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
     <Method Name="SafetyAcknowledged" Id="{66a6e82f-44b9-4ef6-af53-489f9dbfbee4}">
@@ -44,15 +42,24 @@ END_VAR
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="StartButtonPressed" Id="{259cd519-0d3b-4132-81ec-9e6582ef725a}">
-      <Declaration><![CDATA[METHOD StartButtonPressed
+    <Method Name="FB_init" Id="{bba99187-f902-4bd8-8cac-07377dad3116}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	// if TRUE, the retain variables are initialized (warm start / cold start)
+	bInitRetains			: BOOL;
+	// if TRUE, the instance afterwards gets moved into the copy code (online
+	// change)
+	bInCopyCode				: BOOL;
+	fbMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
+]]></ST>
       </Implementation>
     </Method>
-    <Method Name="StopButtonPressed" Id="{5bcbd9e0-34b1-49d0-92cf-ebd7b40f9183}">
-      <Declaration><![CDATA[METHOD StopButtonPressed
+    <Method Name="Execute" Id="{ffd65fcd-7940-4aad-813f-b77fa379a0dc}">
+      <Declaration><![CDATA[METHOD Execute
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

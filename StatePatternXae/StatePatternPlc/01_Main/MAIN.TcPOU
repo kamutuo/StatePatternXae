@@ -4,10 +4,24 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	fbMainStateMachine			: FB_MainStateMachine;
+	_fbXmlSrvWrite				: FB_XmlSrvWrite;
+	_bWrite						: BOOL;
+	_bError						: BOOL;
+	_nErrorID					: UDINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbMainStateMachine.Execute();
+
+//_fbXmlSrvWrite(
+//	nMode		:= XMLSRV_ADDMISSING,
+//	pSymAddr	:= ADR(MachineParameters.stData),
+//	cbSymSize	:= SIZEOF(MachineParameters.stData),
+//	sFilePath	:= MachineParameters.sFilePath,
+//	sXPath		:= MachineParameters.sXPath,
+//	bExecute	:= _bWrite,
+//	bError		=> _bError,
+//	nErrId		=> _nErrorID);
 ]]></ST>
     </Implementation>
   </POU>

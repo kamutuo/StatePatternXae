@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_StateReadParameters" Id="{d06eba43-4d67-4414-9ab9-44be67d2f02c}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateReadParameters IMPLEMENTS I_State
+VAR
+	_refMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+	_fbXmlSrvRead				: FB_XmlSrvRead;
+	_fbXmlSrvWrite				: FB_XmlSrvWrite;
+	_eState						: (Null, ReadParameters, Done, Error);
+	_bWrite						: BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="StopButtonPressed" Id="{445be649-727c-4203-8d2d-78693d8e3145}">
+      <Declaration><![CDATA[METHOD StopButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartButtonPressed" Id="{5a10994b-3f3f-4e40-b6a6-e4b0aab8e025}">
+      <Declaration><![CDATA[METHOD StartButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{7469fe26-825a-4e09-92c5-86ca59062f26}">
+      <Declaration><![CDATA[METHOD Execute
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[CASE _eState OF
+	Null:
+		_eState := ReadParameters;
+		
+	ReadParameters:
+		_fbXmlSrvRead(
+			pSymAddr	:= ADR(MachineParameters.stData),
+			cbSymSize	:= SIZEOF(MachineParameters.stData),
+			sFilePath	:= MachineParameters.sFilePath,
+			sXPath		:= MachineParameters.sXPath,
+			bExecute	:= TRUE);
+		
+		IF NOT _fbXmlSrvRead.bBusy AND NOT _fbXmlSrvRead.bError THEN
+			_fbXmlSrvRead(bExecute := FALSE);
+			_eState := Done;
+		ELSIF NOT _fbXmlSrvRead.bBusy AND _fbXmlSrvRead.bError THEN
+			_fbXmlSrvRead(bExecute := FALSE);
+			_eState := Error;
+		END_IF
+		
+	Done:
+		_eState := Null;
+		_refMainStateMachine.SetState(_refMainStateMachine.ipStateEStop);
+		
+	Error:
+		_fbXmlSrvWrite(
+			pSymAddr	:= ADR(MachineParameters.stData),
+			cbSymSize	:= SIZEOF(MachineParameters.stData),
+			sFilePath	:= MachineParameters.sFilePath,
+			sXPath		:= MachineParameters.sXPath,
+			bExecute	:= _bWrite);
+END_CASE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{a3f9f64f-c1df-4d42-b14e-58c4ec93f78f}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	// if TRUE, the retain variables are initialized (warm start / cold start)
+	bInitRetains			: BOOL;
+	// if TRUE, the instance afterwards gets moved into the copy code (online
+	// change)
+	bInCopyCode				: BOOL;
+	fbMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyTripped" Id="{a4e20ab1-79a2-4599-b9a0-5c8799b4ac89}">
+      <Declaration><![CDATA[METHOD SafetyTripped
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyAcknowledged" Id="{f9dac850-8892-44ec-98c1-cffca2efbe6e}">
+      <Declaration><![CDATA[METHOD SafetyAcknowledged
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
