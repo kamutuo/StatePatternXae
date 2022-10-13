@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_MainStateMachine" Id="{0f2041b2-a01f-4e9f-96cb-99c64e7f13f9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MainStateMachine
+VAR
+	_fbStateEStop				: FB_StateEStop(
+		fbMainStateMachine			:= THIS^);
+	_fbStateInit				: FB_StateInit(
+		fbMainStateMachine			:= THIS^);
+	_ipActState					: I_State := _fbStateEStop;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Execute" Id="{a6afd69f-f3e0-4a88-9316-9340d8c4bc07}">
+      <Declaration><![CDATA[METHOD Execute
+VAR_INST
+	_fbFTrigStartButton			: F_TRIG;
+	_fbFTrigStopButton			: F_TRIG;
+	_fbFTrigEStopOK				: F_TRIG;
+	_fbRTrigEStopOK				: R_TRIG;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_fbFTrigStartButton(CLK := IO.bStartButton);
+
+IF _fbFTrigStartButton.Q THEN
+	_ipActState.StartButtonPressed();
+END_IF
+
+_fbFTrigStopButton(CLK := IO.bStopButton);
+
+IF _fbFTrigStopButton.Q THEN
+	_ipActState.StopButtonPressed();
+END_IF
+
+_fbFTrigEStopOK(CLK := Safety.bEStopOK);
+
+IF _fbFTrigEStopOK.Q THEN
+	_ipActState.SafetyTripped();
+END_IF
+
+_fbRTrigEStopOK(CLK := Safety.bEStopOK);
+
+IF _fbRTrigEStopOK.Q THEN
+	_ipActState.SafetyAcknowledged();
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ipStateEStop" Id="{79062b13-1ab4-4df0-a77c-9ef391cc880d}">
+      <Declaration><![CDATA[PROPERTY ipStateEStop : I_State]]></Declaration>
+      <Get Name="Get" Id="{ceb4d155-51eb-41f9-8175-275c35c7f30e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipStateEStop := _fbStateEStop;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ipStateInit" Id="{b1a17f63-28f2-4d52-b42d-455e8da1bfdf}">
+      <Declaration><![CDATA[PROPERTY ipStateInit : I_State]]></Declaration>
+      <Get Name="Get" Id="{5547f3cd-571e-4d7a-b7bc-5e5464abce3b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipStateInit := _fbStateInit;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SetState" Id="{e29ccf1e-7d42-4882-9f9c-d5a86cc99150}">
+      <Declaration><![CDATA[METHOD SetState
+VAR_INPUT
+	ipNextState			: I_State;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_ipActState := ipNextState;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

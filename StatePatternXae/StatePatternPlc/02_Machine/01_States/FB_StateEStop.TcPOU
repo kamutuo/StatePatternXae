@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_StateEStop" Id="{f54b014d-f326-4723-be88-6f13db5d8daf}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateEStop IMPLEMENTS I_State
+VAR
+	_refMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{50d0ae89-8e9e-49ae-9389-acc70814cc80}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	// if TRUE, the retain variables are initialized (warm start / cold start)
+	bInitRetains			: BOOL;
+	// if TRUE, the instance afterwards gets moved into the copy code (online
+	// change)
+	bInCopyCode				: BOOL;
+	fbMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyAcknowledged" Id="{5cddf761-b72b-4632-96c5-9e7ef79c977d}">
+      <Declaration><![CDATA[METHOD SafetyAcknowledged
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refMainStateMachine.SetState(_refMainStateMachine.ipStateInit);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyTripped" Id="{d9415e47-30ed-4951-a49c-b8be46bfc9d9}">
+      <Declaration><![CDATA[METHOD SafetyTripped
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartButtonPressed" Id="{40b582c5-15c2-4625-9214-ceca93a65606}">
+      <Declaration><![CDATA[METHOD StartButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StopButtonPressed" Id="{0a1a9aca-495d-4051-b8f6-eebd2f604001}">
+      <Declaration><![CDATA[METHOD StopButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

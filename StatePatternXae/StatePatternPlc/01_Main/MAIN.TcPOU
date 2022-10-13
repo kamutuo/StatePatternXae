@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="MAIN" Id="{f3139f12-9ca1-4049-865c-64720935ee72}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbMainStateMachine			: FB_MainStateMachine;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbMainStateMachine.Execute();
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
