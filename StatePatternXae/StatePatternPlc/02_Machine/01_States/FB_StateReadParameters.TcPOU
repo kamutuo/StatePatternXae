@@ -80,7 +80,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
 _fbTcAlarm.CreateEx(
-	stEventEntry		:= TC_EVENTS.StatePatternEvents.ParameterReadError,
+	stEventEntry		:= TC_EVENTS.StatePatternEvents.Error100ParameterReadError,
 	bWithConfirmation	:= FALSE,
 	ipSourceInfo		:= 0);
 ]]></ST>

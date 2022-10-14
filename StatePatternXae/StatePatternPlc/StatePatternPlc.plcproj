@@ -20,6 +20,9 @@
     <Compile Include="02_Machine\01_States\FB_StateEStop.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="02_Machine\01_States\FB_StateBegin.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="02_Machine\01_States\FB_StateInit.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -33,6 +36,15 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="02_Machine\I_State.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="02_Machine\ST_MainStateMachineHmi.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="02_Machine\ST_MainStateMachineHmiCommand.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="02_Machine\ST_MainStateMachineHmiStatus.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="03_IO\IO.TcGVL">
@@ -53,6 +65,10 @@
     <Compile Include="05_MachineParameters\ST_MachineParametersAxis.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="06_Hmi\Hmi.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
@@ -67,6 +83,7 @@
     <Folder Include="03_IO" />
     <Folder Include="04_Safety" />
     <Folder Include="05_MachineParameters" />
+    <Folder Include="06_Hmi" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">

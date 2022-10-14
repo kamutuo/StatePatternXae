@@ -2,22 +2,29 @@
 <TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32">
 	<DataTypes>
 		<DataType>
-			<Name GUID="{C94CB0B5-2FC3-4719-80A9-0BECB3D5C853}" PersistentType="true">StatePatternEvents</Name>
+			<Name GUID="{85B00B78-1392-4D25-88E2-C12FE6942AE7}" PersistentType="true">StatePatternEvents</Name>
 			<DisplayName TxtId=""><![CDATA[State pattern events]]></DisplayName>
 			<EventId>
-				<Name Id="100">ParameterReadError</Name>
-				<DisplayName TxtId=""><![CDATA[Parameter read error: {0}]]></DisplayName>
-				<Severity>Error</Severity>
+				<Name Id="1">Info001MachineStarted</Name>
+				<DisplayName TxtId=""><![CDATA[Machine started]]></DisplayName>
+				<Severity>Info</Severity>
 			</EventId>
 			<EventId>
-				<Name Id="10">StateChanged</Name>
+				<Name Id="10">Info010StateChanged</Name>
 				<DisplayName TxtId=""><![CDATA[State changed to "{0}"]]></DisplayName>
 				<Severity>Info</Severity>
+			</EventId>
+			<EventId>
+				<Name Id="100">Error100ParameterReadError</Name>
+				<DisplayName TxtId=""><![CDATA[Parameter read error: {0}]]></DisplayName>
+				<Severity>Error</Severity>
 			</EventId>
 			<Hides>
 				<Hide GUID="{B250DC6D-A212-4E44-9376-6371D7DDE8F5}"/>
 				<Hide GUID="{CC0BBAC4-6FB8-431E-AF72-A6487BA6D1B2}"/>
 				<Hide GUID="{6CD6B8F2-BB9D-44AE-86C7-A5C4D1281CDE}"/>
+				<Hide GUID="{C94CB0B5-2FC3-4719-80A9-0BECB3D5C853}"/>
+				<Hide GUID="{40B6A7AF-C7C3-4188-9126-F01E3CAC1A0F}"/>
 			</Hides>
 		</DataType>
 	</DataTypes>

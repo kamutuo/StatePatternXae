@@ -3,6 +3,8 @@
   <POU Name="FB_MainStateMachine" Id="{0f2041b2-a01f-4e9f-96cb-99c64e7f13f9}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK FB_MainStateMachine
 VAR
+	_fbStateBegin				: FB_StateBegin(
+		fbMainStateMachine			:= THIS^);
 	_fbStateReadParameters		: FB_StateReadParameters(
 		fbMainStateMachine			:= THIS^);
 	_fbStateEStop				: FB_StateEStop(
@@ -11,10 +13,10 @@ VAR
 		fbMainStateMachine			:= THIS^);
 	_fbStateError				: FB_StateError(
 		fbMainStateMachine			:= THIS^);
-	_ipActState					: I_State := _fbStateReadParameters;
-	_ipPrevState				: I_State;
-	_sActState					: STRING;
+	_ipActState					: I_State := _fbStateBegin;
+	_ipPrevState				: I_State := _fbStateBegin;
 	_fbTcMessage				: FB_TcMessage;
+	_refHmi						: REFERENCE TO ST_MainStateMachineHmi;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -53,7 +55,7 @@ VAR_INST
 	_fbRTrigEStopOK				: R_TRIG;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_fbFTrigStartButton(CLK := IO.bStartButton);
+        <ST><![CDATA[_fbFTrigStartButton(CLK := _refHmi.stCommand.bStartButton);
 
 _ipActState.Execute();
 
@@ -61,7 +63,7 @@ IF _fbFTrigStartButton.Q THEN
 	_ipActState.StartButtonPressed();
 END_IF
 
-_fbFTrigStopButton(CLK := IO.bStopButton);
+_fbFTrigStopButton(CLK := _refHmi.stCommand.bStopButton);
 
 IF _fbFTrigStopButton.Q THEN
 	_ipActState.StopButtonPressed();
@@ -79,7 +81,7 @@ IF _fbRTrigEStopOK.Q THEN
 	_ipActState.SafetyAcknowledged();
 END_IF
 
-_sActState := _ipActState.GetDescription();
+_refHmi.stStatus.sActState := _ipActState.GetDescription();
 ]]></ST>
       </Implementation>
     </Method>
@@ -121,11 +123,14 @@ VAR_INPUT
 	// if TRUE, the instance afterwards gets moved into the copy code (online
 	// change)
 	bInCopyCode				: BOOL;
+	stHmi					: REFERENCE TO ST_MainStateMachineHmi;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_fbTcMessage.CreateEx(
-	stEventEntry	:= TC_EVENTS.StatePatternEvents.StateChanged,
+        <ST><![CDATA[_refHmi REF= stHmi;
+
+_fbTcMessage.CreateEx(
+	stEventEntry	:= TC_EVENTS.StatePatternEvents.Info010StateChanged,
 	ipSourceInfo	:= 0);
 ]]></ST>
       </Implementation>

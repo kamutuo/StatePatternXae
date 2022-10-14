@@ -1,8 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
-  <GVL Name="IO" Id="{a97fe345-8888-4882-81fa-e6a9195840ef}">
+  <GVL Name="Hmi" Id="{c01be153-0ad2-49c4-8fdf-7f8869731658}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-END_VAR]]></Declaration>
+	stMainStateMachine				: ST_MainStateMachineHmi;
+END_VAR
+]]></Declaration>
   </GVL>
 </TcPlcObject>

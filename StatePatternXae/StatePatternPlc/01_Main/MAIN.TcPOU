@@ -3,25 +3,12 @@
   <POU Name="MAIN" Id="{f3139f12-9ca1-4049-865c-64720935ee72}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	fbMainStateMachine			: FB_MainStateMachine;
-	_fbXmlSrvWrite				: FB_XmlSrvWrite;
-	_bWrite						: BOOL;
-	_bError						: BOOL;
-	_nErrorID					: UDINT;
+	fbMainStateMachine			: FB_MainStateMachine(
+		stHmi						:= Hmi.stMainStateMachine);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[fbMainStateMachine.Execute();
-
-//_fbXmlSrvWrite(
-//	nMode		:= XMLSRV_ADDMISSING,
-//	pSymAddr	:= ADR(MachineParameters.stData),
-//	cbSymSize	:= SIZEOF(MachineParameters.stData),
-//	sFilePath	:= MachineParameters.sFilePath,
-//	sXPath		:= MachineParameters.sXPath,
-//	bExecute	:= _bWrite,
-//	bError		=> _bError,
-//	nErrId		=> _nErrorID);
 ]]></ST>
     </Implementation>
   </POU>

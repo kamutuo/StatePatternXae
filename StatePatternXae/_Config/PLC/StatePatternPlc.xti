@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <TcSmItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.32" ClassName="CNestedPlcProjDef">
 	<Project GUID="{B1060655-CA83-4E25-9E03-9B20514662A8}" Name="StatePatternPlc" PrjFilePath="..\..\StatePatternPlc\StatePatternPlc.plcproj" TmcFilePath="..\..\StatePatternPlc\StatePatternPlc.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="StatePatternPlc\StatePatternPlc.tmc" TmcHash="{0DA1E3AA-26BF-4607-62E2-E7B2D4CA2EA9}">
+		<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="StatePatternPlc\StatePatternPlc.tmc" TmcHash="{BB80F018-A860-F508-0B86-384C535BBED3}">
 			<Name>StatePatternPlc Instance</Name>
 			<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 			<Contexts>

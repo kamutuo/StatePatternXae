@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_StateBegin" Id="{c23222e7-7a85-4c4b-a6b1-9f625840daab}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateBegin IMPLEMENTS I_State
+VAR
+	_refMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+	_fbTcMessage				: FB_TcMessage;
+	_fbTon						: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="SafetyTripped" Id="{277a61e6-9929-4cb6-aa21-37cab37b30b1}">
+      <Declaration><![CDATA[METHOD SafetyTripped
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{33555ac9-e0a1-4814-a475-2455dfbd8bc2}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	// if TRUE, the retain variables are initialized (warm start / cold start)
+	bInitRetains			: BOOL;
+	// if TRUE, the instance afterwards gets moved into the copy code (online
+	// change)
+	bInCopyCode				: BOOL;
+	fbMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
+_fbTcMessage.CreateEx(
+	stEventEntry	:= TC_EVENTS.StatePatternEvents.Info001MachineStarted,
+	ipSourceInfo	:= 0);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyAcknowledged" Id="{4f3eaf11-4b9a-40d6-90b6-54949ff4e956}">
+      <Declaration><![CDATA[METHOD SafetyAcknowledged
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClearErrors" Id="{6a44044f-3ac7-4935-b041-5a34f290078f}">
+      <Declaration><![CDATA[METHOD ClearErrors
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartButtonPressed" Id="{b6a0d132-31af-496e-98eb-7e72428faef5}">
+      <Declaration><![CDATA[METHOD StartButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDescription" Id="{cebf82b6-8992-45d1-95c0-240ff92b556d}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetDescription := 'Begin';
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{e5d4d2b8-6c9c-41f9-9f36-2371c8c34bae}">
+      <Declaration><![CDATA[METHOD Execute
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _TaskInfo[GETCURTASKINDEXEX()].FirstCycle THEN
+	_fbTcMessage.Send(0);
+END_IF
+
+_fbTon(IN := TRUE, PT := T#100MS);
+
+IF _fbTon.Q THEN
+	_fbTon(IN := FALSE);
+	_refMainStateMachine.SetState(_refMainStateMachine.ipStateReadParameters);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StopButtonPressed" Id="{fc92dfe7-ccb9-4be4-b335-3eaf6b74bcbc}">
+      <Declaration><![CDATA[METHOD StopButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
