@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_StateError" Id="{eeed6ac7-e68c-4278-9d61-2c19f6c85117}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StateError IMPLEMENTS I_State
+VAR
+	_refMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+	_fbXmlSrvRead				: FB_XmlSrvRead;
+	_nErrorAckCount				: UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="FB_init" Id="{55065133-d105-4658-99bc-7a60d238c930}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	// if TRUE, the retain variables are initialized (warm start / cold start)
+	bInitRetains			: BOOL;
+	// if TRUE, the instance afterwards gets moved into the copy code (online
+	// change)
+	bInCopyCode				: BOOL;
+	fbMainStateMachine		: REFERENCE TO FB_MainStateMachine;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StopButtonPressed" Id="{708b4350-9d95-4587-8c34-e780bb234fa2}">
+      <Declaration><![CDATA[METHOD StopButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{8737d1c4-23d2-4d12-a1c6-68dcd451482b}">
+      <Declaration><![CDATA[METHOD Execute
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyTripped" Id="{95208b12-2d2c-4151-8da1-d5dd8514cbae}">
+      <Declaration><![CDATA[METHOD SafetyTripped
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ClearErrors" Id="{9fbd23a6-d862-486b-8486-4990db5535cc}">
+      <Declaration><![CDATA[METHOD ClearErrors
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SafetyAcknowledged" Id="{b09610c4-425f-4b11-bb73-8e8af849c769}">
+      <Declaration><![CDATA[METHOD SafetyAcknowledged
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDescription" Id="{c558a173-9014-4b09-9d2a-6eb6d4f7b8cc}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetDescription := 'Error';
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="StartButtonPressed" Id="{d2b9d275-72b1-43b7-bc0b-ade5c7e5f2e1}">
+      <Declaration><![CDATA[METHOD StartButtonPressed
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _refMainStateMachine.ipPrevState <> 0 THEN
+	_nErrorAckCount := _nErrorAckCount + 1;
+	_refMainStateMachine.ipPrevState.ClearErrors();
+	_refMainStateMachine.SetState(_refMainStateMachine.ipPrevState);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

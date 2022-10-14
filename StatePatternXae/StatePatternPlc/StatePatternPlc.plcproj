@@ -26,6 +26,9 @@
     <Compile Include="02_Machine\01_States\FB_StateReadParameters.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="02_Machine\01_States\FB_StateError.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="02_Machine\FB_MainStateMachine.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -77,6 +80,10 @@
     <PlaceholderReference Include="Tc2_XmlDataSrv">
       <DefaultResolution>Tc2_XmlDataSrv, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_XmlDataSrv</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_EventLogger">
+      <DefaultResolution>Tc3_EventLogger, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_EventLogger</Namespace>
     </PlaceholderReference>
     <PlaceholderReference Include="Tc3_Module">
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>

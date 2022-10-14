@@ -13,6 +13,14 @@ END_VAR
       <Declaration><![CDATA[METHOD StopButtonPressed
 ]]></Declaration>
     </Method>
+    <Method Name="ClearErrors" Id="{5c2599b8-436e-446f-a348-08e833d91155}">
+      <Declaration><![CDATA[METHOD ClearErrors
+]]></Declaration>
+    </Method>
+    <Method Name="GetDescription" Id="{62557635-2323-4e69-a8bb-03a4401cb099}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+    </Method>
     <Method Name="Execute" Id="{694935d9-e2c1-45ae-8e5c-da8824704a3b}">
       <Declaration><![CDATA[METHOD Execute
 ]]></Declaration>

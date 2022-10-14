@@ -49,11 +49,26 @@ END_VAR
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="ClearErrors" Id="{9276a5fb-6d4f-4528-9456-7c9b9fe82b4d}">
+      <Declaration><![CDATA[METHOD ClearErrors
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Execute" Id="{9394d869-4e2b-4a71-a094-f42d5147ed92}">
       <Declaration><![CDATA[METHOD Execute
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDescription" Id="{a3dc8466-b4c9-4048-ae4d-e6e38f702a1c}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetDescription := 'Emergency stop';
+]]></ST>
       </Implementation>
     </Method>
     <Method Name="SafetyTripped" Id="{d9415e47-30ed-4951-a49c-b8be46bfc9d9}">

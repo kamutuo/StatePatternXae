@@ -32,6 +32,13 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="ClearErrors" Id="{8e286c84-0347-4016-a21c-8f3a83832f09}">
+      <Declaration><![CDATA[METHOD ClearErrors
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SafetyTripped" Id="{b4ab07ef-9a3c-4938-a5af-d618d54e9104}">
       <Declaration><![CDATA[METHOD SafetyTripped
 VAR_INPUT
@@ -55,6 +62,14 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[_refMainStateMachine REF= fbMainStateMachine;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetDescription" Id="{c64389ca-42c0-40d6-8412-1fd9d83f0279}">
+      <Declaration><![CDATA[METHOD GetDescription : STRING
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetDescription := 'Initialization';
 ]]></ST>
       </Implementation>
     </Method>

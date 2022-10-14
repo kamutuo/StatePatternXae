@@ -9,12 +9,29 @@ VAR
 		fbMainStateMachine			:= THIS^);
 	_fbStateInit				: FB_StateInit(
 		fbMainStateMachine			:= THIS^);
+	_fbStateError				: FB_StateError(
+		fbMainStateMachine			:= THIS^);
 	_ipActState					: I_State := _fbStateReadParameters;
+	_ipPrevState				: I_State;
+	_sActState					: STRING;
+	_fbTcMessage				: FB_TcMessage;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Property Name="ipStateError" Id="{373b2ce1-aeb4-4e75-89db-ab4c715f31d1}">
+      <Declaration><![CDATA[PROPERTY ipStateError : I_State]]></Declaration>
+      <Get Name="Get" Id="{b982d442-9dbc-4616-9d30-bda9daa68b73}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipStateError := _fbStateError;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="ipStateEStop" Id="{79062b13-1ab4-4df0-a77c-9ef391cc880d}">
       <Declaration><![CDATA[PROPERTY ipStateEStop : I_State]]></Declaration>
       <Get Name="Get" Id="{ceb4d155-51eb-41f9-8175-275c35c7f30e}">
@@ -61,6 +78,8 @@ _fbRTrigEStopOK(CLK := Safety.bEStopOK);
 IF _fbRTrigEStopOK.Q THEN
 	_ipActState.SafetyAcknowledged();
 END_IF
+
+_sActState := _ipActState.GetDescription();
 ]]></ST>
       </Implementation>
     </Method>
@@ -81,11 +100,59 @@ END_VAR
 VAR_INPUT
 	ipNextState			: I_State;
 END_VAR
+VAR
+	sTemp				: STRING;
+END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_ipActState := ipNextState;
+        <ST><![CDATA[_ipPrevState := _ipActState;
+_ipActState := ipNextState;
+sTemp := _ipActState.GetDescription();
+_fbTcMessage.ipArguments.Clear().AddString(sTemp);
+_fbTcMessage.Send(0);
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="FB_init" Id="{e46f4422-1157-44cb-b6ca-6a8fcb030318}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	// if TRUE, the retain variables are initialized (warm start / cold start)
+	bInitRetains			: BOOL;
+	// if TRUE, the instance afterwards gets moved into the copy code (online
+	// change)
+	bInCopyCode				: BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_fbTcMessage.CreateEx(
+	stEventEntry	:= TC_EVENTS.StatePatternEvents.StateChanged,
+	ipSourceInfo	:= 0);
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="ipPrevState" Id="{ec14d2c9-1a4b-4691-9b72-8e0e2d2c74f2}">
+      <Declaration><![CDATA[PROPERTY ipPrevState : I_State]]></Declaration>
+      <Get Name="Get" Id="{10369f42-e015-42c0-8c95-11c8d9cb3954}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipPrevState := _ipPrevState;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ipStateReadParameters" Id="{f3fb5999-ed96-49aa-8150-19a96a958ff4}">
+      <Declaration><![CDATA[PROPERTY ipStateReadParameters : I_State]]></Declaration>
+      <Get Name="Get" Id="{faba43bd-2417-4a29-accd-3b3becf499c4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ipStateReadParameters := _fbStateReadParameters;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>
